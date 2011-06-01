@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fbid: 1
+  email: MyString
+  username: MyString
+  gender: 
+  interested_in: 
+  access_token: MyString
+  friends: 
+  interested_in_local: 
+  myself_friend: 
+
+two:
+  fbid: 1
+  email: MyString
+  username: MyString
+  gender: 
+  interested_in: 
+  access_token: MyString
+  friends: 
+  interested_in_local: 
+  myself_friend: 
