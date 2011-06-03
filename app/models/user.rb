@@ -1,12 +1,15 @@
 class User < ActiveRecord::Base
   belongs_to :gender
-  belongs_to :interested_in
+  belongs_to :interested_in, :class_name => "Gender"
   belongs_to :friends
-  belongs_to :interested_in_local
-  belongs_to :myself_friend
-
+  belongs_to :interested_in_local, :class_name => "Gender"
+  belongs_to :myself_friend, :class_name => "Friend"
+  has_many :families
+  
   def self.create_from_facebook fb_info, token
-    friend = Friend.create(:fbid => fb_info.id, :name => fb_info.name, :gender => Gender.find_by_gender(fb_info.gender))
+    friend = Friend.find_by_fbid(fb_info.id)
+    friend = Friend.create(:fbid => fb_info.id, :name => fb_info.name, :gender => Gender.find_by_gender(fb_info.gender)) if !friend
+    
     create(:fbid => fb_info.id, :email => fb_info.email, :username => fb_info.username, :gender => Gender.find_by_gender(fb_info.gender), :access_token => token, :myself_friend => friend)
   end
 

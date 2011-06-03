@@ -19,6 +19,10 @@ class FacebookAPI
     friends_info.each {friend.name}
   end
 
+  def get_family_info access_token, user
+    MiniFB.fql access_token, "SELECT uid FROM family where profile_id = #{user.fbid}"
+  end
+
   private
   def redirect_url
     "http://#{HOST_NAME}/login"
