@@ -9,8 +9,7 @@ class FacebookAPI
   end
 
   def get_my_info access_token
-    me = MiniFB.get(access_token, "me", :type=>nil)
-    me.name
+    MiniFB.get(access_token, "me", :type=>nil)
   end
 
   def get_my_friends_info access_token

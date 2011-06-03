@@ -8,12 +8,12 @@ class HomeController < ApplicationController
 
   def login
     fb_api = FacebookAPI.new
-    debugger
-
     session[:access_token] = fb_api.get_access_token params[:code]
-    fb_api.get_my_info session[:access_token]
-    fb_api.get_my_friends_info session[:access_token]
-    redirect_to :action => :show_matches
+
+    fb_to_db = FbToDb.new session[:access_token]
+    fb_to_db.fb_to_db
+
+#    redirect_to :action => :show_matches
   end
 
   def show_matches
