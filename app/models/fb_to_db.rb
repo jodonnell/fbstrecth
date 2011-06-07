@@ -9,7 +9,7 @@ class FbToDb
 
   def fb_to_db
     user = store_my_info
-    store_family_info user
+    store_family user
   end
 
   def store_my_info
@@ -23,12 +23,9 @@ class FbToDb
     user
   end
 
-  def store_family_info user
+  def store_family user
     family = @fb_api.get_family_info @access_token, user
-    family.collect { |f| f.uid }
-
-    
-    
-#    user.families = 
+    family_friends = family.collect { |f| Family.create :fbid => f.uid }
+    user.families = family_friends
   end
 end
