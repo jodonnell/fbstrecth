@@ -1,6 +1,7 @@
 require 'facebook_api'
 
 class FbToDb
+  attr_writer :fb_api
   def initialize access_token
     @access_token = access_token
     @fb_api = FacebookAPI.new
@@ -28,6 +29,6 @@ class FbToDb
 
     
     
-    user.families = 
+#    user.families = 
   end
 end

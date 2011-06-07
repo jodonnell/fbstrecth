@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   end
 
   def update_from_facebook fb_info, token
-    if fb_info.id != fbid and fb_info.email != email and fb_info.username != username and fb_info.gender != gender.gender and token != access_token
+    if fb_info.id != fbid or fb_info.email != email or fb_info.username != username or fb_info.gender != gender.gender or token != access_token
       self.fbid = fb_info.id
       self.email = fb_info.email
       self.username = fb_info.username
