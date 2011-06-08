@@ -15,7 +15,7 @@ class FacebookAPI
   def get_my_friends_info access_token
     friends_data = MiniFB.get(access_token, "me", :type=>"friends")
     friend_ids = friends_data.data.collect {|friend_data| friend_data.id}
-    friends_info = MiniFB.fql(access_token, "SELECT uid, name, profile_url, pic, sex FROM user where uid IN (" + friend_ids.join(',') + ")")
+    friends_info = MiniFB.fql(access_token, "SELECT uid, name, profile_url, pic, sex FROM user where uid IN (#{friend_ids.join(',')})")
     friends_info.each {friend.name}
   end
 

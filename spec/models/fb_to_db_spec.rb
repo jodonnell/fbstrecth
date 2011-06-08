@@ -5,6 +5,7 @@ describe "fb_to_db" do
   before(:each) do
     @fb_return_user = fb_api_return_user
     @fb_return_family = fb_api_return_family
+    @fb_return_friends = fb_api_return_friends
     
     fb_double = stub_fb_api
     @fb_to_db = create_fb_to_db fb_double
@@ -17,8 +18,8 @@ describe "fb_to_db" do
   end
 
   it "edits the user on subsequent logins when their data changes" do
-    @user = @fb_to_db.store_my_info
     @user.gender.gender.should == 'male'
+
     @fb_return_user.gender = 'female'
     user = @fb_to_db.store_my_info
     user.gender.gender.should == 'female'
@@ -38,17 +39,29 @@ describe "fb_to_db" do
     @user.families.length.should == 1
   end
 
-  it "adds friends" do
-    pending
+  it "creates new friends" do
     @fb_to_db.store_friends @user
-    @user.friends.length.should = 10
+    @user.friends.length.should == 10
   end
 
+  it "does not add family to your friends" do 
+    pending
+  end
+
+  it "removes old friends" do
+    pending
+  end
+
+  it "edits friends data on subsequent logins" do
+    pending
+  end
+  
   private
   def stub_fb_api
     fb_double = stub('FacebookAPI')
     fb_double.stub(:get_my_info).and_return(@fb_return_user)
     fb_double.stub(:get_family_info).and_return(@fb_return_family)
+    fb_double.stub(:get_my_friends_info).and_return(@fb_return_friends)
     fb_double
   end
 
@@ -68,5 +81,18 @@ describe "fb_to_db" do
 
   def fb_api_return_family
     [Hashie::Mash.new(uid: "1")]
+  end
+
+  def fb_api_return_friends
+    [Hashie::Mash.new(uid:108154,name:"Juan Gutierrez",profile_url:"http:\/\/www.facebook.com\/profile.php?id=108154",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/27411_108154_6390_s.jpg",sex:"male"),
+     Hashie::Mash.new(uid:405604,name:"Audrey Rasizer",profile_url:"http:\/\/www.facebook.com\/AudreyR",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/23069_405604_5776_s.jpg",sex:"female"),
+     Hashie::Mash.new(uid:906043,name:"Sarah Templeton",profile_url:"http:\/\/www.facebook.com\/profile.php?id=906043",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/202847_906043_6781830_s.jpg",sex:"female"),
+     Hashie::Mash.new(uid:929899,name:"Abby Garner",profile_url:"http:\/\/www.facebook.com\/profile.php?id=929899",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/49300_929899_8628_s.jpg",sex:"female"),
+     Hashie::Mash.new(uid:1301222,name:"Andrew Herbert",profile_url:"http:\/\/www.facebook.com\/profile.php?id=1301222",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/41633_1301222_9411_s.jpg",sex:"male"),
+     Hashie::Mash.new(uid:1408582,name:"Alexa Baz",profile_url:"http:\/\/www.facebook.com\/profile.php?id=1408582",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/187089_1408582_5635254_s.jpg",sex:"female"),
+     Hashie::Mash.new(uid:1700652,name:"Lil O'Donnell",profile_url:"http:\/\/www.facebook.com\/lilod",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/186506_1700652_609825_s.jpg",sex:"female"),
+     Hashie::Mash.new(uid:1700812,name:"Brady Messmer",profile_url:"http:\/\/www.facebook.com\/profile.php?id=1700812",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/202845_1700812_8086425_s.jpg",sex:"female"),
+     Hashie::Mash.new(uid:2419802,name:"Katherine Don",profile_url:"http:\/\/www.facebook.com\/profile.php?id=2419802",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/195514_2419802_8781_s.jpg",sex:"female"),
+     Hashie::Mash.new(uid:2517719,name:"Jen",profile_url:"http:\/\/www.facebook.com\/jenhwang",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/41427_2517719_3166_s.jpg",sex:"female")]
   end
 end

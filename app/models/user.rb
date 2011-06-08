@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   belongs_to :gender
   belongs_to :interested_in, :class_name => "Gender"
-  belongs_to :friends
+  has_and_belongs_to_many :friends
   belongs_to :interested_in_local, :class_name => "Gender"
   belongs_to :myself_friend, :class_name => "Friend"
   has_many :families

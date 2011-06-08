@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110531044343) do
+ActiveRecord::Schema.define(:version => 20110608052446) do
 
   create_table "families", :force => true do |t|
     t.integer  "fbid"
@@ -27,6 +27,11 @@ ActiveRecord::Schema.define(:version => 20110531044343) do
     t.string   "profile_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "friends_users", :id => false, :force => true do |t|
+    t.integer "friend_id"
+    t.integer "user_id"
   end
 
   create_table "genders", :force => true do |t|
