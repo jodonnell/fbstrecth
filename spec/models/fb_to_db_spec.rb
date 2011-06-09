@@ -27,7 +27,7 @@ describe "fb_to_db" do
 
   it "stores the family information" do
     @fb_to_db.store_family @user
-    @user.families[0].fbid.should == 1
+    @user.families[0].fbid.should == 1700652
   end
 
   it "removes old family" do
@@ -45,7 +45,10 @@ describe "fb_to_db" do
   end
 
   it "does not add family to your friends" do 
-    pending
+    @fb_to_db.store_family @user
+    @fb_to_db.store_friends @user
+
+    @user.friends.should_not include(Friend.find_by_fbid 1700652)
   end
 
   it "removes old friends" do
@@ -55,6 +58,7 @@ describe "fb_to_db" do
   it "edits friends data on subsequent logins" do
     pending
   end
+
   
   private
   def stub_fb_api
@@ -80,7 +84,7 @@ describe "fb_to_db" do
   end
 
   def fb_api_return_family
-    [Hashie::Mash.new(uid: "1")]
+    [Hashie::Mash.new(uid: "1700652")]
   end
 
   def fb_api_return_friends

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   belongs_to :interested_in_local, :class_name => "Gender"
   belongs_to :myself_friend, :class_name => "Friend"
   has_many :families
+  has_many :matches
   
   def self.create_from_facebook fb_info, token
     friend = Friend.find_by_fbid(fb_info.id)

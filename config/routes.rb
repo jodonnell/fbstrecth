@@ -10,6 +10,7 @@ Stretchlist::Application.routes.draw do
 
   match 'login' => 'home#login'
   match 'show_matches' => 'home#show_matches'
+  match 'submit_matches' => 'home#submit_matches'
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

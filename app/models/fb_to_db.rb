@@ -28,12 +28,21 @@ class FbToDb
     family = @fb_api.get_family_info @access_token, user
     family_friends = family.collect { |f| Family.create :fbid => f.uid }
     user.families = family_friends
+    user.save!
   end
 
   def store_friends user
     friends_hash = @fb_api.get_my_friends_info @access_token
+    friends_hash = remove_friends friends_hash, user.families
     friends = friends_hash.collect {|f| Friend.create :name => f.name, :fbid => f.uid,
       :gender => Gender.find_by_gender(f.sex), :profile_url => f.profile_url, :pic => f.pic}
     user.friends = friends
+    user.save!
+  end
+
+  private
+  def remove_friends friends_hash, family
+    family_fbids = family.collect {|f| f.fbid }
+    friends_hash.select {|f| not family_fbids.include? f.uid }
   end
 end
