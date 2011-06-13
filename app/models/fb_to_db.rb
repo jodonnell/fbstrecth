@@ -34,10 +34,21 @@ class FbToDb
   def store_friends user
     friends_hash = @fb_api.get_my_friends_info @access_token
     friends_hash = remove_friends friends_hash, user.families
-    friends = friends_hash.collect {|f| Friend.create :name => f.name, :fbid => f.uid,
-      :gender => Gender.find_by_gender(f.sex), :profile_url => f.profile_url, :pic => f.pic}
+
+    friends = friends_hash.collect do |f|
+      friend = Friend.find_by_fbid f.uid
+      if !friend
+        friend = Friend.create :name => f.name, :fbid => f.uid, :gender => Gender.find_by_gender(f.sex), :profile_url => f.profile_url, :pic => f.pic
+      else
+        friend.update_from_facebook f
+      end
+      friend
+    end
+    friends.each {|f| puts f.name; f.save!}
     user.friends = friends
     user.save!
+    user.friends.each {|f| puts f.name}
+
   end
 
   private

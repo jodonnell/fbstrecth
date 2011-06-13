@@ -12,53 +12,76 @@ describe "fb_to_db" do
     @user = @fb_to_db.store_my_info
   end
 
-  it "stores my info to db on first use" do 
-    @user.fbid.should == 3800139
-    @user.myself_friend.id.should == 1
+  describe "my information is stored correctly" do
+    it "stores my info to db on first use" do 
+      @user.fbid.should == 3800139
+      @user.myself_friend.id.should == 1
+    end
+
+    it "edits the user on subsequent logins when their data changes" do
+      @user.gender.gender.should == 'male'
+
+      @fb_return_user.gender = 'female'
+      user = @fb_to_db.store_my_info
+      user.gender.gender.should == 'female'
+    end
   end
+    
+  describe "family information is stored correctly" do
+    it "stores the family information" do
+      @fb_to_db.store_family @user
+      @user.families[0].fbid.should == 1700652
+    end
 
-  it "edits the user on subsequent logins when their data changes" do
-    @user.gender.gender.should == 'male'
+    it "removes old family" do
+      @fb_to_db.store_family @user
 
-    @fb_return_user.gender = 'female'
-    user = @fb_to_db.store_my_info
-    user.gender.gender.should == 'female'
+      @fb_return_family[0].uid = '2'
+      @fb_to_db.store_family @user
+      @user.families[0].fbid.should == 2
+      @user.families.length.should == 1
+    end
   end
+    
+  describe "friend information is stored correctly" do
+    it "creates new friends" do
+      @fb_to_db.store_friends @user
+      @user.friends.length.should == 10
+    end
 
-  it "stores the family information" do
-    @fb_to_db.store_family @user
-    @user.families[0].fbid.should == 1700652
+    it "does not add family to your friends" do 
+      @fb_to_db.store_family @user
+      @fb_to_db.store_friends @user
+
+      @user.friends.should_not include(Friend.find_by_fbid 1700652)
+    end
+
+    it "removes old friends" do
+      @fb_to_db.store_friends @user
+      @fb_return_friends.pop
+
+      @fb_to_db.store_friends @user
+      @user.friends.length.should == 9
+    end
+
+    it "can accept a nil gender" do
+      @fb_return_friends[0].sex = ''
+      @fb_to_db.store_friends @user
+    end
+    
+    it "edits friends data on subsequent logins" do
+      pending
+      
+      @fb_to_db.store_friends @user
+      @fb_return_friends[0].name = 'Poop McBucket'
+
+      @fb_to_db.store_friends @user
+      @user.friends[0].name.should == 'Poop McBucket'
+
+      Friend.count.should == 11
+    end
   end
-
-  it "removes old family" do
-    @fb_to_db.store_family @user
-
-    @fb_return_family[0].uid = '2'
-    @fb_to_db.store_family @user
-    @user.families[0].fbid.should == 2
-    @user.families.length.should == 1
-  end
-
-  it "creates new friends" do
-    @fb_to_db.store_friends @user
-    @user.friends.length.should == 10
-  end
-
-  it "does not add family to your friends" do 
-    @fb_to_db.store_family @user
-    @fb_to_db.store_friends @user
-
-    @user.friends.should_not include(Friend.find_by_fbid 1700652)
-  end
-
-  it "removes old friends" do
-    pending
-  end
-
-  it "edits friends data on subsequent logins" do
-    pending
-  end
-
+    
   
   private
   def stub_fb_api
