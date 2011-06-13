@@ -1,0 +1,13 @@
+<html>
+  <body>
+    <%= form_tag({:action => :submit_matches}) do %>
+      <% for friend in @user.friends %>
+        <%= check_box_tag(:matches) %>
+        <img src="<%= friend.pic %>">
+        <%= friend.name %>
+	<br/>
+      <% end %>
+      <%= submit_tag("Submit") %>
+    <% end %>
+  </body>
+</html>
