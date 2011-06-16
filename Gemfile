@@ -25,7 +25,7 @@ gem 'ruby-debug19', :require => 'ruby-debug'
 # gem 'aws-s3', :require => 'aws/s3'
 
 group :production do
-  gem 'mysql2'
+  gem 'mysql2', '0.2.8'
 end
 
 # Bundle gems for the local environment. Make sure to
