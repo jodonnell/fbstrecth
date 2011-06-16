@@ -47,3 +47,7 @@ Stretchlist::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 end
+
+FB_APP_ID = "229284007084745"
+FB_SECRET = "5d2fefc32cd82ef71d5ec413ba40b5f7"
+HOST_NAME = "screenmold.com"

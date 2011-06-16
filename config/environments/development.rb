@@ -24,3 +24,6 @@ Stretchlist::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 end
 
+FB_APP_ID = "210100592345280"
+FB_SECRET = "5f1ca141c3865addcbea22f09221e05d"
+HOST_NAME = "stretchlist.com:3000"
