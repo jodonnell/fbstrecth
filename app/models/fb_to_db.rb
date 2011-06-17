@@ -33,7 +33,7 @@ class FbToDb
 
   def store_friends user
     friends_hash = @fb_api.get_my_friends_info @access_token
-    friends_hash = remove_friends friends_hash, user.families
+    friends_hash = remove_family friends_hash, user.families
 
     friends = friends_hash.collect do |f|
       friend = Friend.find_by_fbid f.uid
@@ -44,15 +44,13 @@ class FbToDb
       end
       friend
     end
-    friends.each {|f| puts f.name; f.save!}
-    user.friends = friends
-    user.save!
-    user.friends.each {|f| puts f.name}
 
+    user.friends = friends
+    user.friends(true)
   end
 
   private
-  def remove_friends friends_hash, family
+  def remove_family friends_hash, family
     family_fbids = family.collect {|f| f.fbid }
     friends_hash.select {|f| not family_fbids.include? f.uid }
   end

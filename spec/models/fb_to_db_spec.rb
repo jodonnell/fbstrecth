@@ -70,8 +70,6 @@ describe "fb_to_db" do
     end
     
     it "edits friends data on subsequent logins" do
-      pending
-      
       @fb_to_db.store_friends @user
       @fb_return_friends[0].name = 'Poop McBucket'
 
