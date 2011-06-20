@@ -7,7 +7,7 @@ Stretchlist::Application.configure do
   config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.
-  config.whiny_nils = true
+  config.whiny_nils = false
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
@@ -26,4 +26,4 @@ end
 
 FB_APP_ID = "210100592345280"
 FB_SECRET = "5f1ca141c3865addcbea22f09221e05d"
-HOST_NAME = "stretchlist.com:3000"
+HOST_NAME = "local.com:3000"
