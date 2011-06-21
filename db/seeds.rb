@@ -8,3 +8,4 @@
 
 Gender.create(:gender => "male")
 Gender.create(:gender => "female")
+Gender.create(:gender => "none")

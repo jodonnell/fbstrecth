@@ -6,15 +6,17 @@ class User < ActiveRecord::Base
   belongs_to :myself_friend, :class_name => "Friend"
   has_many :families
   has_many :matches
+
+  validates_presence_of :gender_id
   
-  def self.create_from_facebook fb_info, token
+  def self.create_from_api fb_info, token
     friend = Friend.find_by_fbid(fb_info.id)
     friend = Friend.create(:fbid => fb_info.id, :name => fb_info.name, :gender => Gender.find_by_gender(fb_info.gender)) if !friend
     
     create(:fbid => fb_info.id, :email => fb_info.email, :username => fb_info.username, :gender => Gender.find_by_gender(fb_info.gender), :access_token => token, :myself_friend => friend)
   end
 
-  def update_from_facebook fb_info, token
+  def update_from_api fb_info, token
     if fb_info.id != fbid or fb_info.email != email or fb_info.username != username or fb_info.gender != gender.gender or token != access_token
       self.fbid = fb_info.id
       self.email = fb_info.email

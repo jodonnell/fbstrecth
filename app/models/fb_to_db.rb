@@ -17,9 +17,9 @@ class FbToDb
     me = @fb_api.get_my_info @access_token
     user = User.find_by_fbid(me.id)
     if !user
-      user = User.create_from_facebook(me, @access_token)
+      user = User.create_from_api(me, @access_token)
     else
-      user.update_from_facebook(me, @access_token)
+      user.update_from_api(me, @access_token)
     end
     user
   end
@@ -34,13 +34,13 @@ class FbToDb
   def store_friends user
     friends_hash = @fb_api.get_my_friends_info @access_token
     friends_hash = remove_family friends_hash, user.families
-
+    debugger
     friends = friends_hash.collect do |f|
       friend = Friend.find_by_fbid f.uid
       if !friend
-        friend = Friend.create :name => f.name, :fbid => f.uid, :gender => Gender.find_by_gender(f.sex), :profile_url => f.profile_url, :pic => f.pic
+        friend = Friend.create_from_api f
       else
-        friend.update_from_facebook f
+        friend.update_from_api f
       end
       friend
     end

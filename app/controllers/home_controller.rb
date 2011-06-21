@@ -22,6 +22,9 @@ class HomeController < ApplicationController
 
   def submit_matches
     user = User.find_by_access_token session[:access_token]
+    if params(:matches).nil?
+      redirect_to :action => :show_matches
+    end
     params(:matches).each do
 #      user.matches = 
     end

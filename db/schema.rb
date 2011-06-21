@@ -10,23 +10,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110608052446) do
+ActiveRecord::Schema.define(:version => 20110620234204) do
 
   create_table "families", :force => true do |t|
-    t.integer  "fbid"
+    t.integer  "fbid",       :limit => 8
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "friends", :force => true do |t|
-    t.integer  "fbid"
+    t.integer  "fbid",        :limit => 8
     t.string   "name"
     t.string   "pic"
     t.integer  "gender_id"
     t.string   "profile_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "square_pic"
   end
 
   create_table "friends_users", :id => false, :force => true do |t|
@@ -51,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20110608052446) do
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "fbid"
+    t.integer  "fbid",                   :limit => 8
     t.string   "email"
     t.string   "username"
     t.integer  "gender_id"
