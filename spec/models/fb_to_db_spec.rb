@@ -15,7 +15,7 @@ describe "fb_to_db" do
   describe "my information is stored correctly" do
     it "stores my info to db on first use" do 
       @user.fbid.should == 3800139
-      @user.myself_friend.id.should == 1
+      @user.myself_friend.should_not be_nil
     end
 
     it "edits the user on subsequent logins when their data changes" do
@@ -65,7 +65,7 @@ describe "fb_to_db" do
     end
 
     it "can accept a nil gender" do
-      @fb_return_friends[0].sex = ''
+      @fb_return_friends[0].sex = 'false value'
       @fb_to_db.store_friends @user
     end
     
