@@ -8,9 +8,9 @@ default_run_options[:pty] = true
 
 set :deploy_to, "/var/stretchlist"
 
-role :web, "screenmold.com"                          # Your HTTP server, Apache/etc
-role :app, "screenmold.com"                          # This may be the same as your `Web` server
-role :db,  "screenmold.com", :primary => true # This is where Rails migrations will run
+role :web, "stretchlist.com"                          # Your HTTP server, Apache/etc
+role :app, "stretchlist.com"                          # This may be the same as your `Web` server
+role :db,  "stretchlist.com", :primary => true # This is where Rails migrations will run
 
 
 # if you're still using the script/reaper helper you will need

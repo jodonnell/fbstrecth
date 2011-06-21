@@ -25,6 +25,14 @@ describe "fb_to_db" do
       user = @fb_to_db.store_my_info
       user.gender.gender.should == 'female'
     end
+
+    it "can accept a nil gender" do
+      pending
+      
+      @fb_return_user.gender = 'false value'
+      @fb_to_db.store_friends @user
+    end
+
   end
     
   describe "family information is stored correctly" do

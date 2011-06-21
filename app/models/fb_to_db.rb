@@ -34,7 +34,7 @@ class FbToDb
   def store_friends user
     friends_hash = @fb_api.get_my_friends_info @access_token
     friends_hash = remove_family friends_hash, user.families
-    debugger
+
     friends = friends_hash.collect do |f|
       friend = Friend.find_by_fbid f.uid
       if !friend
