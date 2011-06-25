@@ -26,6 +26,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def interested_in_local_id
+    return 0 if interested_in_local.nil?
+    interested_in_local.id
+  end
+
   def get_matches
     match_gender = interested_in_local || interested_in || opposite_sex
     return friends if match_gender == Gender.bisexual

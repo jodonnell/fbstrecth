@@ -21,7 +21,7 @@ class HomeController < ApplicationController
     set_interested_in(user) unless params[:interested_in_id].nil?
 
     @potential_matches = user.get_matches
-    @current_orientation = user.interested_in_local.id
+    @current_orientation = user.interested_in_local_id
     puts @current_orientation
   end
 
