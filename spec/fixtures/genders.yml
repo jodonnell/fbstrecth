@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+male:
+  id: 1
+  gender: "male"
+
+female:
+  id: 2
+  gender: "female"
+
+none:
+  id: 3
+  gender: "none"
+
+bisexual:
+  id: 4
+  gender: "bisexual"

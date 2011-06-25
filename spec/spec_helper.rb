@@ -17,6 +17,7 @@ Spork.prefork do
 
   require Rails.root.join('db','seeds')
 
+  
   RSpec.configure do |config|
     # == Mock Framework
     #
@@ -29,6 +30,7 @@ Spork.prefork do
 
     # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
+    config.use_instantiated_fixtures = true
 
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false

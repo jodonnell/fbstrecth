@@ -6,4 +6,16 @@ class Gender < ActiveRecord::Base
     end
     gender
   end
+
+  def self.male
+    find_by_gender "male"
+  end
+
+  def self.female
+    find_by_gender "female"
+  end
+
+  def self.bisexual
+    find_by_gender "bisexual"
+  end
 end

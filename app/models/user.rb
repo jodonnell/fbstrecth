@@ -7,10 +7,11 @@ class User < ActiveRecord::Base
   has_many :families
   has_many :matches
 
+  validates_presence_of :gender_id
+  
   def self.create_from_api fb_info, token
     friend = Friend.find_by_fbid(fb_info.id)
-    friend = Friend.create(:fbid => fb_info.id, :name => fb_info.name, :gender => Gender.find_by_gender(fb_info.gender)) if !friend
-    
+    friend = Friend.create(:fbid => fb_info.id, :name => fb_info.name, :gender => Gender.find_by_gender_or_get_none(fb_info.gender)) if !friend
     create(:fbid => fb_info.id, :email => fb_info.email, :username => fb_info.username, :gender => Gender.find_by_gender_or_get_none(fb_info.gender), :access_token => token, :myself_friend => friend)
   end
 
@@ -25,4 +26,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def get_matches
+    match_gender = interested_in_local || interested_in || opposite_sex
+    return friends if match_gender == Gender.bisexual
+    friends.find_all_by_gender_id(match_gender.id)
+  end
+
+  private
+  def opposite_sex
+    return Gender.find_by_gender('female') if gender.gender == 'male'
+    return Gender.find_by_gender('male')
+  end
 end

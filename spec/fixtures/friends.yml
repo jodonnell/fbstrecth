@@ -1,0 +1,22 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+bob:
+  fbid: 1
+  name: "Bob"
+  pic: "http://blah.com"
+  gender_id: 1
+  profile_url: "http://blah.com"
+
+sally:
+  fbid: 2
+  name: "http://blah.com"
+  pic: "http://blah.com"
+  gender_id: 2
+  profile_url: "http://blah.com"
+
+fred:
+  fbid: 3
+  name: "http://blah.com"
+  pic: "http://fred.com"
+  gender_id: 1
+  profile_url: "http://blah.com"

@@ -25,14 +25,6 @@ describe "fb_to_db" do
       user = @fb_to_db.store_my_info
       user.gender.gender.should == 'female'
     end
-
-    it "can accept a nil gender" do
-      pending
-      
-      @fb_return_user.gender = 'false value'
-      @fb_to_db.store_friends @user
-    end
-
   end
     
   describe "family information is stored correctly" do
@@ -72,11 +64,6 @@ describe "fb_to_db" do
       @user.friends.length.should == 9
     end
 
-    it "can accept a nil gender" do
-      @fb_return_friends[0].sex = 'false value'
-      @fb_to_db.store_friends @user
-    end
-    
     it "edits friends data on subsequent logins" do
       @fb_to_db.store_friends @user
       @fb_return_friends[0].name = 'Poop McBucket'
@@ -84,11 +71,10 @@ describe "fb_to_db" do
       @fb_to_db.store_friends @user
       @user.friends[0].name.should == 'Poop McBucket'
 
-      Friend.count.should == 11
+      @user.friends.count.should == 10
     end
   end
     
-  
   private
   def stub_fb_api
     fb_double = stub('FacebookAPI')

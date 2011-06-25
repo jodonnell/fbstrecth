@@ -17,7 +17,8 @@ class HomeController < ApplicationController
   end
 
   def show_matches
-    @user = User.find_by_access_token session[:access_token]
+    user = User.find_by_access_token session[:access_token]
+    @potential_matches = user.get_matches
   end
 
   def submit_matches

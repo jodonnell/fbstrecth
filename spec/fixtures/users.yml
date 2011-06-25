@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+bob:
+  fbid: 1
+  email: "bob@bob.com"
+  username: "bob"
+  gender_id: 1
+  interested_in: 2
+  access_token: "bob"
+  friends: sally, fred
+  interested_in_local: 2
+  myself_friend: 1
+
+sally:
+  fbid: 2
+  email: "sally@sally.com"
+  username: "sally"
+  gender_id: 2
+  interested_in: 1
+  access_token: "sally"
+  friends: bob
+  interested_in_local: 1
+  myself_friend: 2
