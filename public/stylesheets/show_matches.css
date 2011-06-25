@@ -1,18 +1,11 @@
-
-.left-margin {
-    position: relative;
-    left: 100px;
-}
-
-#logo {
-}
-
-#steps {
+#content {
+    width: 1090px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #all-friends-box {
-    float: left;
-    width:720px;
+    margin-right: 360px;
 } 
 
 .rounded-corners {
@@ -24,15 +17,10 @@
 }
 
 #matches-box {
-    position: relative;
-    left: 840px;
+    float: right;
     width: 340px;
     height: 600px;
 } 
-
-#select-box {
-    
-}
 
 .friend-box {
     margin-top: 10px;
@@ -47,4 +35,9 @@
     position: relative;
     top: -35px;
     left: 5px;
+}
+
+.a-match {
+    height: 50px;
+    margin: 4px;
 }

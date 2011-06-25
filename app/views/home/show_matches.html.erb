@@ -2,38 +2,42 @@
 <%= stylesheet_link_tag "show_matches" %>
 <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" %>
 <% end %>
-<div id="logo" class="left-margin">
-  <img src="/images/logo.png" alt="Stretchlist logo" />
-</div>
-<div id="steps" class="left-margin">
-  <img src="/images/step1.png" alt="Step help 1" />
-  <img src="/images/step2.png" alt="Step help 2" />
-  <img src="/images/step3.png" alt="Step help 3" />
-</div>
-<%= form_tag({:action => :show_matches}) do %>
-<p><%= select_tag(:interested_in_id, options_from_collection_for_select(Gender.sexual_orientations, :id, :gender, @current_orientation)) %></p>
-<p><%= submit_tag("Submit") %></p>
-<% end %>
 
-<div id="select-box">
-  <div id="all-friends-box" class="rounded-corners left-margin">
-    <%= form_tag({:action => :submit_matches}) do %>
-    <% for friend in @potential_matches %>
-    <div class="friend-box rounded-corners">
-      <img src="<%= friend.square_pic %>" alt="A friends picture" />
-      <span class="friend-name"><%= friend.name %></span>
-    </div>
-    <% end %>
-    <p><%= submit_tag("Submit") %></p>
-    <% end %>
+<div id="content">
+  <div id="logo">
+    <img src="/images/logo.png" alt="Stretchlist logo" />
   </div>
-  <div id="matches-box" class="rounded-corners">&nbsp;</div>
+  <div id="steps">
+    <img src="/images/step1.png" alt="Step help 1" />
+    <img src="/images/step2.png" alt="Step help 2" />
+    <img src="/images/step3.png" alt="Step help 3" />
+  </div>
+  <%= form_tag({:action => :show_matches}) do %>
+  <p><%= select_tag(:interested_in_id, options_from_collection_for_select(Gender.sexual_orientations, :id, :gender, @current_orientation)) %></p>
+  <p><%= submit_tag("Submit") %></p>
+  <% end %>
+
+  <div id="matches-box" class="rounded-corners"></div>
+  <div id="select-box">
+    <div id="all-friends-box" class="rounded-corners">
+      <%= form_tag({:action => :submit_matches}) do %>
+      <% for friend in @potential_matches %>
+      <div class="friend-box rounded-corners">
+	<img src="<%= friend.square_pic %>" alt="A friends picture" />
+	<span class="friend-name"><%= friend.name %></span>
+      </div>
+      <% end %>
+      <p><%= submit_tag("Submit") %></p>
+      <% end %>
+    </div>
+
+  </div>
 </div>
 <script type="text/javascript">
   $('.friend-box').bind('click', function(event) {
-  var image = event.target.children[0].src;
-  var name = event.target.children[1].firstChild.data;
-  $('#matches-box')[0].innerHTML = '<div style="height:50px;" class="rounded-corners"><img src="' + image +'" alt="A friends picture" /><span class="friend-name">'+ name +'</span></div>';
+  var image = event.currentTarget.children[0].src;
+  var name = event.currentTarget.children[1].firstChild.data;
+  $('#matches-box')[0].innerHTML += '<div class="a-match rounded-corners"><img src="' + image +'" alt="A friends picture" /><span class="friend-name">'+ name +'</span></div>';
   });
 
 </script>
