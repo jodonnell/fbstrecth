@@ -10,6 +10,11 @@
   <img src="/images/step2.png" alt="Step help 2" />
   <img src="/images/step3.png" alt="Step help 3" />
 </div>
+<%= form_tag({:action => :show_matches}) do %>
+<p><%= select_tag(:interested_in_id, options_from_collection_for_select(Gender.sexual_orientations, :id, :gender, @current_orientation)) %></p>
+<p><%= submit_tag("Submit") %></p>
+<% end %>
+
 <div id="select-box">
   <div id="all-friends-box" class="rounded-corners left-margin">
     <%= form_tag({:action => :submit_matches}) do %>

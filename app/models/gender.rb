@@ -18,4 +18,8 @@ class Gender < ActiveRecord::Base
   def self.bisexual
     find_by_gender "bisexual"
   end
+
+  def self.sexual_orientations
+    [self.male, self.female, self.bisexual]
+  end
 end
