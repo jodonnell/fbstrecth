@@ -22,17 +22,21 @@ class HomeController < ApplicationController
 
     @potential_matches = user.get_matches
     @current_orientation = user.interested_in_local_id
+    @current_list = user.active_list
     puts @current_orientation
   end
 
-  def submit_matches
+  def submit_list
     user = User.find_by_access_token session[:access_token]
-    if params[:matches].nil?
-      redirect_to :action => :show_matches
+    return redirect_to :action => :show_matches if params[:ids].blank?
+
+    friends = params[:ids].collect do |friend_id|
+      id = friend_id.sub /friend_/, ''
+      Friend.find id
     end
-    params[:matches].each do
-#      user.matches = 
-    end
+      
+    Match.create_list user, friends, Time.now
+    
     redirect_to :action => :show_matches
   end
 

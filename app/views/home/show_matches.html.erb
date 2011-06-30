@@ -17,27 +17,44 @@
   <p><%= submit_tag("Submit") %></p>
   <% end %>
 
-  <div id="matches-box" class="rounded-corners"></div>
+
+  <div id="matches-box" class="rounded-corners">
+    <%= form_tag({:action => :submit_list}) do %>
+    <div id="matches-box-content">
+      <% for match in @current_list %>
+      <div class="a-match rounded-corners">
+	<img src="<%= match.friend.square_pic%>" alt="A friends picture" />
+	<span class="friend-name"><%= match.friend.name %></span>
+	<input type="hidden" name="ids[]" value="<%= match.friend.id %>" />
+      </div>
+      <% end %>
+    </div>
+    <p><%= submit_tag("Submit") %></p>
+  </div>
+  <% end %>
   <div id="select-box">
     <div id="all-friends-box" class="rounded-corners">
-      <%= form_tag({:action => :submit_matches}) do %>
       <% for friend in @potential_matches %>
-      <div class="friend-box rounded-corners">
+      <div class="friend-box rounded-corners" id="friend_<%= friend.id %>">
 	<img src="<%= friend.square_pic %>" alt="A friends picture" />
 	<span class="friend-name"><%= friend.name %></span>
       </div>
-      <% end %>
-      <p><%= submit_tag("Submit") %></p>
       <% end %>
     </div>
 
   </div>
 </div>
 <script type="text/javascript">
-  $('.friend-box').bind('click', function(event) {
-  var image = event.currentTarget.children[0].src;
-  var name = event.currentTarget.children[1].firstChild.data;
-  $('#matches-box')[0].innerHTML += '<div class="a-match rounded-corners"><img src="' + image +'" alt="A friends picture" /><span class="friend-name">'+ name +'</span></div>';
-  });
+
+$('.friend-box').bind('click', function(event) {
+    var image = event.currentTarget.children[0].src;
+    var id = event.currentTarget.id;
+    var name = event.currentTarget.children[1].firstChild.data;
+    $('#matches-box-content')[0].innerHTML += '<div class="a-match rounded-corners"><img src="' + image +'" alt="A friends picture" /><span class="friend-name">'+ name +'</span><input type="hidden" name="ids[]" value="' + id + '" /></div>';
+});
+
+$('.a-match').bind('click', function(event) {
+    $(this).remove();
+});
 
 </script>

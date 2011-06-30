@@ -44,11 +44,11 @@ ActiveRecord::Schema.define(:version => 20110620234204) do
   create_table "matches", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
-    t.datetime "create_time"
     t.boolean  "active"
     t.boolean  "emailed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "create_time"
   end
 
   create_table "users", :force => true do |t|

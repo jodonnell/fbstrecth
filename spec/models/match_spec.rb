@@ -9,4 +9,11 @@ describe Match do
     Match.create_list users(:bob), [friends(:fred), friends(:sally)], Time.now
     users(:bob).active_list.length.should == 2
   end
+
+  it "creates a list and unactivates the old one" do
+    Match.create_list users(:bob), [friends(:fred), friends(:sally)], Time.now
+    Match.create_list users(:bob), [friends(:fred)], Time.now
+    users(:bob).active_list.length.should == 1
+    
+  end
 end
