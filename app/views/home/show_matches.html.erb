@@ -20,18 +20,18 @@
 
   <div id="matches-box" class="rounded-corners">
     <%= form_tag({:action => :submit_list}) do %>
-    <div id="matches-box-content">
-      <% for match in @current_list %>
-      <div class="a-match rounded-corners">
-	<img src="<%= match.friend.square_pic%>" alt="A friends picture" />
-	<span class="friend-name"><%= match.friend.name %></span>
-	<input type="hidden" name="ids[]" value="<%= match.friend.id %>" />
+      <div id="matches-box-content">
+        <% for match in @current_list %>
+    	  <div class="a-match rounded-corners">
+	    <img src="<%= match.friend.square_pic%>" alt="A friends picture" />
+	    <span class="friend-name"><%= match.friend.name %></span>
+	    <input type="hidden" name="ids[]" value="<%= match.friend.id %>" />
+	  </div>
+	<% end %>
       </div>
-      <% end %>
-    </div>
-    <p><%= submit_tag("Submit") %></p>
+      <p><%= submit_tag("Submit") %></p>
+    <% end %>
   </div>
-  <% end %>
   <div id="select-box">
     <div id="all-friends-box" class="rounded-corners">
       <% for friend in @potential_matches %>
