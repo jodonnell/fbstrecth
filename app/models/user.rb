@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     friends.find_all_by_gender_id(match_gender.id)
   end
 
+  def active_list
+    matches.where :active => true
+  end
+  
   private
   def opposite_sex
     return Gender.find_by_gender('female') if gender.gender == 'male'
