@@ -2,6 +2,7 @@ class Friend < ActiveRecord::Base
   has_many :users
   belongs_to :gender
   has_many :matches
+  has_one :myself_friend, :class_name => "User"
 
   validates_presence_of :gender_id
   

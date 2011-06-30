@@ -38,7 +38,8 @@ class User < ActiveRecord::Base
   end
 
   def active_list
-    matches.where :active => true
+    active_matches = matches.where :active => true
+    active_matches.collect {|match| match.friend}
   end
   
   private

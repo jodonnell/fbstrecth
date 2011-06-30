@@ -9,7 +9,7 @@ bob:
   access_token: "bob"
   friends: sally, fred
   interested_in_local: 2
-  myself_friend: 1
+  myself_friend: bob
 
 sally:
   fbid: 2
@@ -20,4 +20,4 @@ sally:
   access_token: "sally"
   friends: bob
   interested_in_local: 1
-  myself_friend: 2
+  myself_friend: sally
