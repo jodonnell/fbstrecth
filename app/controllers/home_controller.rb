@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     user = User.find_by_access_token session[:access_token]
     set_interested_in(user) unless params[:interested_in_id].nil?
 
-    @potential_matches = user.get_matches
+    @potential_matches = user.get_potential_matches
     @current_orientation = user.interested_in_local_id
     @current_list = user.active_list
   end
@@ -35,7 +35,8 @@ class HomeController < ApplicationController
     end
     friends.uniq!
     
-    Match.create_list user, friends, Time.now
+    user.create_list friends
+    user.make_matches
     
     redirect_to :action => :show_matches
   end

@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
     interested_in_local.id
   end
 
-  def get_matches
+  def get_potential_matches
     match_gender = interested_in_local || interested_in || opposite_sex
     return friends if match_gender == Gender.bisexual
     friends.find_all_by_gender_id(match_gender.id)
@@ -40,6 +40,20 @@ class User < ActiveRecord::Base
   def active_list
     active_matches = matches.where :active => true
     active_matches.collect {|match| match.friend}
+  end
+
+  def make_matches
+    matches = Match.matches self
+    matches.each do |match|
+      message = MatchMailer.match self, match
+      message.deliver
+      message = MatchMailer.match match, self
+      message.deliver
+    end
+  end
+
+  def create_list friends
+    Match.create_list self, friends, Time.now
   end
   
   private

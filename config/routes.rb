@@ -9,7 +9,7 @@ Stretchlist::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
 
   match 'login' => 'home#login'
-  match 'show_matches' => 'home#show_matches'
+  match 'show_matches' => 'home#show_matches', :as => :show_matches
   match 'submit_list' => 'home#submit_list'
 
   # Sample of named route:
