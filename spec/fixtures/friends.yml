@@ -9,14 +9,16 @@ bob:
 
 sally:
   fbid: 2
-  name: "http://blah.com"
-  pic: "http://blah.com"
+  name: "Sally"
+  pic: "http://placekitten.com/50/50"
+  square_pic: "http://placekitten.com/50/50"
   gender_id: 2
   profile_url: "http://blah.com"
 
 fred:
   fbid: 3
-  name: "http://blah.com"
-  pic: "http://fred.com"
+  name: "Fred"
+  pic: "http://placekitten.com/50/50"
+  square_pic: "http://placekitten.com/50/50"
   gender_id: 1
   profile_url: "http://blah.com"
