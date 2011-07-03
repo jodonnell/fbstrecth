@@ -14,7 +14,7 @@
   </div>
   <%= form_tag({:action => :show_matches}) do %>
   <p><%= select_tag(:interested_in_id, options_from_collection_for_select(Gender.sexual_orientations, :id, :gender, @current_orientation)) %></p>
-  <p><%= submit_tag("Submit") %></p>
+  <p><%= submit_tag("Change orientation") %></p>
   <% end %>
 
 
@@ -29,7 +29,7 @@
 	  </div>
 	<% end %>
       </div>
-      <p><%= submit_tag("Submit") %></p>
+      <p><%= submit_tag("Create List") %></p>
     <% end %>
   </div>
   <div id="select-box">
