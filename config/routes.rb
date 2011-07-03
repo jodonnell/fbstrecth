@@ -8,7 +8,7 @@ Stretchlist::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
-  match 'login' => 'home#login'
+  match 'login' => 'home#login', :as => :login
   match 'show_matches' => 'home#show_matches', :as => :show_matches
   match 'submit_list' => 'home#submit_list'
 
@@ -54,7 +54,7 @@ Stretchlist::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "home#index"
+  root :to => "home#index", :as => :home
 # root :to => "oauth#start"
 
 
