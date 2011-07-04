@@ -1,9 +1,11 @@
 class Match < ActiveRecord::Base
   belongs_to :user
   belongs_to :friend
-
+  
   def self.create_list user, friends, create_time
+    friends = check_list friends
     user.matches.where(:active => true).each {|match| match.active = false; match.save!}
+
     friends.each do |friend|
       Match.create :user => user, :friend => friend, :create_time => create_time, :active => true, :emailed => false
     end
@@ -17,4 +19,21 @@ class Match < ActiveRecord::Base
     end
     users
   end
+
+  def self.check_list friends
+    friends.uniq!
+    raise ListTooBigError if friends.size > max_list_size
+    friends
+  end
+
+  private
+
+  def self.max_list_size
+    @max_list_size ||= 5
+  end
+
+  def self.max_list_size=(size)
+    @max_list_size = size
+  end
+
 end

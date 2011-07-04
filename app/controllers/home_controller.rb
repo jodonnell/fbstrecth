@@ -33,7 +33,6 @@ class HomeController < ApplicationController
       id = friend_id.sub /friend_/, ''
       Friend.find id
     end
-    friends.uniq!
     
     user.create_list friends
     user.make_matches
