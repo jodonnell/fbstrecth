@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110620234204) do
+ActiveRecord::Schema.define(:version => 20110707043456) do
 
   create_table "families", :force => true do |t|
     t.integer  "fbid",       :limit => 8
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20110620234204) do
   end
 
   create_table "friends", :force => true do |t|
-    t.integer  "fbid",        :limit => 8
+    t.integer  "fbid",                :limit => 8
     t.string   "name"
     t.string   "pic"
     t.integer  "gender_id"
@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(:version => 20110620234204) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "square_pic"
+    t.string   "location"
+    t.datetime "birthday"
+    t.string   "relationship_status"
   end
 
   create_table "friends_users", :id => false, :force => true do |t|

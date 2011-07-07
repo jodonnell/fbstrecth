@@ -18,19 +18,27 @@ Then /^I see "([^"]*)" as one of my options$/ do |name| #"
   page.should have_content(name)
 end
 
-When /^I visit the show matches page and change to view men$/ do
+When /^I visit the show matches page and change to view "([^"]*)"$/ do |sex| #"
   visit show_matches_path
-  select('male', :from => 'interested_in_id')
+  select(sex, :from => 'interested_in_id')
   click_on('Change orientation')
 end
 
-When /^I visit the show matches page and choose Sally$/ do
+When /^I visit the show matches page and choose "([^"]*)"$/ do |name| "#"
   visit show_matches_path
-  find("#friend_#{Fixtures.identify(:sally)}").click
+  find("#friend_#{send(string_to_identifier(name)).id}").click
   click_on 'Create List'
-  save_and_open_page
 end
 
-Then /^I have created a match list with Sally$/ do
+When /^I logout and login as "([^"]*)"$/ do |arg1| #"
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^"([^"]*)" selects me$/ do |arg1| #"
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I have created a match list with "([^"]*)"$/ do |arg1| #"
   Match.count.should == 1
 end
+

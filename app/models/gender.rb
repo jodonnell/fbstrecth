@@ -1,9 +1,7 @@
 class Gender < ActiveRecord::Base
   def self.find_by_gender_or_get_none gender_string
     gender = find_by_gender gender_string
-    if gender.nil?
-      gender = find_by_gender 'none'
-    end
+    gender = find_by_gender 'none' if gender.nil?
     gender
   end
 
@@ -21,5 +19,9 @@ class Gender < ActiveRecord::Base
 
   def self.sexual_orientations
     [self.male, self.female, self.bisexual]
+  end
+
+  def to_s
+    gender.capitalize
   end
 end

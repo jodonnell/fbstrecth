@@ -30,10 +30,17 @@
     margin-right: 20px;
 }
 
+.friend-box img {
+    float: left;
+}
+
 .friend-name {
     font-weight: bold;
+}
+
+.friend-info {
     position: relative;
-    top: -35px;
+    top: -5px;
     left: 5px;
 }
 

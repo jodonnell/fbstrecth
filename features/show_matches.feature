@@ -9,12 +9,14 @@ Feature: Show Matches Feature
   When I visit the show matches page
   Then I see "Jacob O'Donnell" as one of my options
 
-  Scenario: I see some women to select but I want dudes
+  Scenario: I see some men to select but I want women
   Given a user
-  When I visit the show matches page and change to view men
-  Then I see "Fred" as one of my options
-
+  When I visit the show matches page and change to view "female"
+  Then I see "Sarah Goodman" as one of my options
+  
   Scenario: I see a special lady and want to save her
   Given a user
-  When I visit the show matches page and choose Sally
-  Then I have created a match list with Sally
+  When I visit the show matches page and choose "Sarah Goodman"
+  And I logout and login as "Sarah Goodman"
+  And "Sarah Goodman" selects me
+  Then I have created a match list with "Sarah Goodman"

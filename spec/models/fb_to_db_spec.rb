@@ -103,15 +103,15 @@ describe "fb_to_db" do
   end
 
   def fb_api_return_friends
-    [Hashie::Mash.new(uid:108154,name:"Juan Gutierrez",profile_url:"http:\/\/www.facebook.com\/profile.php?id=108154",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/27411_108154_6390_s.jpg",sex:"male"),
-     Hashie::Mash.new(uid:405604,name:"Audrey Rasizer",profile_url:"http:\/\/www.facebook.com\/AudreyR",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/23069_405604_5776_s.jpg",sex:"female"),
-     Hashie::Mash.new(uid:906043,name:"Sarah Templeton",profile_url:"http:\/\/www.facebook.com\/profile.php?id=906043",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/202847_906043_6781830_s.jpg",sex:"female"),
-     Hashie::Mash.new(uid:929899,name:"Abby Garner",profile_url:"http:\/\/www.facebook.com\/profile.php?id=929899",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/49300_929899_8628_s.jpg",sex:"female"),
-     Hashie::Mash.new(uid:1301222,name:"Andrew Herbert",profile_url:"http:\/\/www.facebook.com\/profile.php?id=1301222",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/41633_1301222_9411_s.jpg",sex:"male"),
-     Hashie::Mash.new(uid:1408582,name:"Alexa Baz",profile_url:"http:\/\/www.facebook.com\/profile.php?id=1408582",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/187089_1408582_5635254_s.jpg",sex:"female"),
-     Hashie::Mash.new(uid:1700652,name:"Lil O'Donnell",profile_url:"http:\/\/www.facebook.com\/lilod",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/186506_1700652_609825_s.jpg",sex:"female"),
-     Hashie::Mash.new(uid:1700812,name:"Brady Messmer",profile_url:"http:\/\/www.facebook.com\/profile.php?id=1700812",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/202845_1700812_8086425_s.jpg",sex:"female"),
-     Hashie::Mash.new(uid:2419802,name:"Katherine Don",profile_url:"http:\/\/www.facebook.com\/profile.php?id=2419802",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/195514_2419802_8781_s.jpg",sex:"female"),
-     Hashie::Mash.new(uid:2517719,name:"Jen",profile_url:"http:\/\/www.facebook.com\/jenhwang",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/41427_2517719_3166_s.jpg",sex:"female")]
+    [Hashie::Mash.new(uid:108154,name:"Juan Gutierrez",profile_url:"http:\/\/www.facebook.com\/profile.php?id=108154",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/27411_108154_6390_s.jpg", gender: Gender.male, location:"New York, NY"),
+     Hashie::Mash.new(uid:405604,name:"Audrey Rasizer",profile_url:"http:\/\/www.facebook.com\/AudreyR",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/23069_405604_5776_s.jpg", gender: Gender.female, location:"New York, NY"),
+     Hashie::Mash.new(uid:906043,name:"Sarah Templeton",profile_url:"http:\/\/www.facebook.com\/profile.php?id=906043",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/202847_906043_6781830_s.jpg", gender: Gender.female, location:"New York, NY"),
+     Hashie::Mash.new(uid:929899,name:"Abby Garner",profile_url:"http:\/\/www.facebook.com\/profile.php?id=929899",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/49300_929899_8628_s.jpg", gender: Gender.female, location:"New York, NY"),
+     Hashie::Mash.new(uid:1301222,name:"Andrew Herbert",profile_url:"http:\/\/www.facebook.com\/profile.php?id=1301222",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/41633_1301222_9411_s.jpg", gender: Gender.male, location:"New York, NY"),
+     Hashie::Mash.new(uid:1408582,name:"Alexa Baz",profile_url:"http:\/\/www.facebook.com\/profile.php?id=1408582",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/187089_1408582_5635254_s.jpg", gender: Gender.female, location:"New York, NY"),
+     Hashie::Mash.new(uid:1700652,name:"Lil O'Donnell",profile_url:"http:\/\/www.facebook.com\/lilod",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/186506_1700652_609825_s.jpg", gender: Gender.female, location:"New York, NY"),
+     Hashie::Mash.new(uid:1700812,name:"Brady Messmer",profile_url:"http:\/\/www.facebook.com\/profile.php?id=1700812",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/202845_1700812_8086425_s.jpg", gender: Gender.female, location:"New York, NY"),
+     Hashie::Mash.new(uid:2419802,name:"Katherine Don",profile_url:"http:\/\/www.facebook.com\/profile.php?id=2419802",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/195514_2419802_8781_s.jpg", gender: Gender.female, location:"New York, NY"),
+     Hashie::Mash.new(uid:2517719,name:"Jen",profile_url:"http:\/\/www.facebook.com\/jenhwang",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/41427_2517719_3166_s.jpg", gender: Gender.female, location:"New York, NY")]
   end
 end

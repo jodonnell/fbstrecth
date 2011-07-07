@@ -2,7 +2,6 @@
 <%= stylesheet_link_tag "show_matches" %>
 <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" %>
 <% end %>
-
 <div id="content">
   <div id="logo">
     <img src="/images/logo.png" alt="Stretchlist logo" />
@@ -12,6 +11,7 @@
     <img src="/images/step2.png" alt="Step help 2" />
     <img src="/images/step3.png" alt="Step help 3" />
   </div>
+  <p><a href="http://www.facebook.com/logout.php" id="facebook-logout"><img src="/images/facebookLogOutButton.png" alt="Facebook logout" /></a></p>
   <%= form_tag({:action => :show_matches}) do %>
   <p><%= select_tag(:interested_in_id, options_from_collection_for_select(Gender.sexual_orientations, :id, :gender, @current_orientation)) %></p>
   <p><%= submit_tag("Change orientation") %></p>
@@ -37,7 +37,9 @@
       <% for friend in @potential_matches %>
       <div class="friend-box rounded-corners" id="friend_<%= friend.id %>">
 	<img src="<%= friend.square_pic %>" alt="A friends picture" />
-	<span class="friend-name"><%= friend.name %></span>
+	<span class="friend-info">
+	  <span class="friend-name"><%= friend.name %></span><br/><%= friend.location %><br/><%= friend.age %>, <%= friend.gender %>, <%= friend.relationship_status %>
+	</span>
       </div>
       <% end %>
     </div>
