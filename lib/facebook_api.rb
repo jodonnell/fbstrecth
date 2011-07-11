@@ -26,7 +26,11 @@ class FacebookAPI
       end
 
       if f.birthday_date
-        f.birthday = DateTime.strptime f.birthday_date, "%m/%d/%Y"
+        begin
+          f.birthday = DateTime.strptime f.birthday_date, "%m/%d/%Y"
+        rescue ArgumentError
+          f.birthday = nil
+        end
       else
         f.birthday = nil
       end
