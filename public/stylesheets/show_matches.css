@@ -1,8 +1,93 @@
+body {
+    background: #111111;
+    font-family: Helvetica;
+}
+
 #content {
     width: 1090px;
     margin-left: auto;
     margin-right: auto;
+    background: black;
+    color: white;
 }
+
+/* nav stuff */
+#titlebar {
+    height: 30px;
+    padding-bottom: 20px;
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: #222222;
+}
+
+#title {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1px;
+    margin-bottom: 10px;
+}
+
+#settings_buttons_menu_toggle {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    opacity: 0.25;
+}
+
+#fb_logout {
+    float: right;
+    margin-right: 2px;
+    opacity: 0.05;
+    padding-top: 1px;
+}
+
+.top_nav {
+    height: 30px;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: #222222;
+    background: #111111;
+}
+
+.show_hide {
+    display: none;
+}
+
+.show_hide {
+    display: none;
+}
+
+.clear {
+    clear:both;
+}
+
+.top_nav ul{
+    list-style: none;
+}
+
+.settings_buttons {
+    float: left;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.3;
+}
+
+.settings_buttons a{
+    display: block;
+    width: 84px;
+    margin-left: 20px;
+    margin-right: 20px;	
+}
+/* end nav stuff */
 
 #all-friends-box {
     margin-right: 360px;
