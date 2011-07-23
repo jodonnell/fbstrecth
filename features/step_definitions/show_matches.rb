@@ -38,7 +38,7 @@ When /^"([^"]*)" selects me$/ do |arg1| #"
   pending # express the regexp above with the code you wish you had
 end
 
-Then /^I have created a match list with "([^"]*)"$/ do |arg1| #"
-  Match.count.should == 1
+Then /^I have created a crush list with "([^"]*)"$/ do |arg1| #"
+  Crush.count.should == 1
 end
 

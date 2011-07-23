@@ -1,21 +1,21 @@
-class Match < ActiveRecord::Base
+class Crush < ActiveRecord::Base
   belongs_to :user
   belongs_to :potential
   
   def self.create_list user, potentials, create_time
     potentials = check_list potentials
-    user.matches.where(:active => true).each {|match| match.active = false; match.save!}
+    user.crushes.where(:active => true).each {|crush| crush.active = false; crush.save!}
 
     potentials.each do |potential|
-      Match.create :user => user, :potential => potential, :create_time => create_time, :active => true, :emailed => false
+      Crush.create :user => user, :potential => potential, :create_time => create_time, :active => true, :emailed => false
     end
   end
 
-  def self.matches user
+  def self.crushes user
     users = []
     user.active_list.each do |potential|
-      potential_match_user = User.find_by_myself_potential_id potential
-      users << potential_match_user if potential_match_user and potential_match_user.active_list.include? user.myself_potential
+      potential_crush_user = User.find_by_myself_potential_id potential
+      users << potential_crush_user if potential_crush_user and potential_crush_user.active_list.include? user.myself_potential
     end
     users
   end

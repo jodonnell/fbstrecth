@@ -22,14 +22,14 @@ describe User do
   
   describe "matches" do
     it "gets matches correctly" do
-      matches = users(:bob).get_potential_matches
+      matches = users(:bob).get_potential_crushes
       matches.should include potentials(:sally)
       matches.should_not include potentials(:fred)
     end
 
     it "gets gay matches correctly" do
       users(:bob).interested_in_local = Gender.male
-      matches = users(:bob).get_potential_matches
+      matches = users(:bob).get_potential_crushes
       matches.should include potentials(:fred)
       matches.should_not include potentials(:sally)
     end
@@ -37,7 +37,7 @@ describe User do
 
     it "gets bisexual matches correctly" do
       users(:bob).interested_in_local = Gender.bisexual
-      matches = users(:bob).get_potential_matches
+      matches = users(:bob).get_potential_crushes
       matches.should include potentials(:fred)
       matches.should include potentials(:sally)
     end
@@ -46,7 +46,7 @@ describe User do
       users(:bob).interested_in = nil
       users(:bob).interested_in_local = nil
       
-      matches = users(:bob).get_potential_matches
+      matches = users(:bob).get_potential_crushes
       matches.should include potentials(:sally)
       matches.should_not include potentials(:fred)
     end
@@ -54,14 +54,14 @@ describe User do
     it "gets facebook preference correctly" do
       users(:bob).interested_in = Gender.male
       users(:bob).interested_in_local = nil
-      matches = users(:bob).get_potential_matches
+      matches = users(:bob).get_potential_crushes
       matches.should include potentials(:fred)
       matches.should_not include potentials(:sally)
     end
 
     it "gets local preference correctly" do
       users(:bob).interested_in_local = Gender.male
-      matches = users(:bob).get_potential_matches
+      matches = users(:bob).get_potential_crushes
       matches.should include potentials(:fred)
       matches.should_not include potentials(:sally)
     end

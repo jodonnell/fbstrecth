@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   belongs_to :interested_in_local, :class_name => "Gender"
   belongs_to :myself_potential, :class_name => "Potential"
   has_many :families
-  has_many :matches
+  has_many :crushes
 
   validates_presence_of :gender_id
   
@@ -31,19 +31,19 @@ class User < ActiveRecord::Base
     interested_in_local.id
   end
 
-  def get_potential_matches
-    match_gender = interested_in_local || interested_in || opposite_sex
-    return potentials if match_gender == Gender.bisexual
-    potentials.find_all_by_gender_id(match_gender.id)
+  def get_potential_crushes
+    crush_gender = interested_in_local || interested_in || opposite_sex
+    return potentials if crush_gender == Gender.bisexual
+    potentials.find_all_by_gender_id(crush_gender.id)
   end
 
   def active_list
-    active_matches = matches.where :active => true
-    active_matches.collect {|match| match.potential}
+    active_crushes = crushes.where :active => true
+    active_crushes.collect {|crush| crush.potential}
   end
 
   def make_matches
-    matches = Match.matches self
+    matches = Crush.crushes self
     matches.each do |match|
       message = MatchMailer.match self, match
       message.deliver
@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   end
 
   def create_list potentials
-    Match.create_list self, potentials, Time.now
+    Crush.create_list self, potentials, Time.now
   end
   
   private

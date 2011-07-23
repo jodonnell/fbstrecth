@@ -10,7 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110723004941) do
+ActiveRecord::Schema.define(:version => 20110723014258) do
+
+  create_table "crushes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "potential_id"
+    t.boolean  "active"
+    t.boolean  "emailed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "create_time"
+  end
 
   create_table "families", :force => true do |t|
     t.integer  "fbid",       :limit => 8
@@ -23,16 +33,6 @@ ActiveRecord::Schema.define(:version => 20110723004941) do
     t.string   "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "matches", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "potential_id"
-    t.boolean  "active"
-    t.boolean  "emailed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "create_time"
   end
 
   create_table "potentials", :force => true do |t|
