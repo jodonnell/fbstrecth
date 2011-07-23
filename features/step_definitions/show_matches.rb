@@ -10,7 +10,7 @@ Given /^a user$/ do
   end
 end
 
-When /^I visit the show matches page$/ do
+When /^I visit the show crushes page$/ do
   visit show_matches_path
 end
 
@@ -18,13 +18,13 @@ Then /^I see "([^"]*)" as one of my options$/ do |name| #"
   page.should have_content(name)
 end
 
-When /^I visit the show matches page and change to view "([^"]*)"$/ do |sex| #"
+When /^I visit the show crushes page and change to view "([^"]*)"$/ do |sex| #"
   visit show_matches_path
   select(sex, :from => 'interested_in_id')
   click_on('Change orientation')
 end
 
-When /^I visit the show matches page and choose "([^"]*)"$/ do |name| "#"
+When /^I visit the show crushes page and choose "([^"]*)"$/ do |name| "#"
   visit show_matches_path
   find("#potential_#{send(string_to_identifier(name)).id}").click
   click_on 'Create List'
