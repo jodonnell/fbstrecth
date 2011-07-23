@@ -36,7 +36,7 @@ Spork.prefork do
   Capybara.default_driver = :selenium
   Capybara.app_host = "http://local.com:3000"
   Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, :browser => :chrome)
+    Capybara::Selenium::Driver.new(app)
   end
 
   World(Capybara)

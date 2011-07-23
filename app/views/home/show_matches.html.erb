@@ -50,11 +50,11 @@
   <div id="matches-box" class="rounded-corners">
     <%= form_tag({:action => :submit_list}) do %>
       <div id="matches-box-content">
-        <% for friend in @current_list %>
+        <% for potential in @current_list %>
     	  <div class="a-match rounded-corners">
-	    <img src="<%= friend.square_pic %>" alt="A friends picture" />
-	    <span class="friend-name"><%= friend.name %></span>
-	    <input type="hidden" name="ids[]" value="<%= friend.id %>" />
+	    <img src="<%= potential.square_pic %>" alt="A potentials picture" />
+	    <span class="potential-name"><%= potential.name %></span>
+	    <input type="hidden" name="ids[]" value="<%= potential.id %>" />
 	  </div>
 	<% end %>
       </div>
@@ -62,12 +62,12 @@
     <% end %>
   </div>
   <div id="select-box">
-    <div id="all-friends-box" class="rounded-corners">
-      <% for friend in @potential_matches %>
-      <div class="friend-box rounded-corners" id="friend_<%= friend.id %>">
-	<img src="<%= friend.square_pic %>" alt="A friends picture" />
-	<span class="friend-info">
-	  <span class="friend-name"><%= friend.name %></span><br/><%= friend.location %><br/><%= friend.age %>, <%= friend.gender %>, <%= friend.relationship_status %>
+    <div id="all-potentials-box" class="rounded-corners">
+      <% for potential in @potential_matches %>
+      <div class="potential-box rounded-corners" id="potential_<%= potential.id %>">
+	<img src="<%= potential.square_pic %>" alt="A potentials picture" />
+	<span class="potential-info">
+	  <span class="potential-name"><%= potential.name %></span><br/><%= potential.location %><br/><%= potential.age %>, <%= potential.gender %>, <%= potential.relationship_status %>
 	</span>
       </div>
       <% end %>
@@ -92,11 +92,11 @@ $('.show_hide').click(function(){
     $(".top_nav").slideToggle();
 });
 
-$('.friend-box').bind('click', function(event) {
+$('.potential-box').bind('click', function(event) {
     var image = event.currentTarget.children[0].src;
     var id = event.currentTarget.id;
     var name = event.currentTarget.children[1].firstChild.data;
-    $('#matches-box-content')[0].innerHTML += '<div class="a-match rounded-corners"><img src="' + image +'" alt="A friends picture" /><span class="friend-name">'+ name +'</span><input type="hidden" name="ids[]" value="' + id + '" /></div>';
+    $('#matches-box-content')[0].innerHTML += '<div class="a-match rounded-corners"><img src="' + image +'" alt="A potentials picture" /><span class="potential-name">'+ name +'</span><input type="hidden" name="ids[]" value="' + id + '" /></div>';
 });
 
 $('.a-match').bind('click', function(event) {

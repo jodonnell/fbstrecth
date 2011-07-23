@@ -1,29 +1,29 @@
 class Match < ActiveRecord::Base
   belongs_to :user
-  belongs_to :friend
+  belongs_to :potential
   
-  def self.create_list user, friends, create_time
-    friends = check_list friends
+  def self.create_list user, potentials, create_time
+    potentials = check_list potentials
     user.matches.where(:active => true).each {|match| match.active = false; match.save!}
 
-    friends.each do |friend|
-      Match.create :user => user, :friend => friend, :create_time => create_time, :active => true, :emailed => false
+    potentials.each do |potential|
+      Match.create :user => user, :potential => potential, :create_time => create_time, :active => true, :emailed => false
     end
   end
 
   def self.matches user
     users = []
-    user.active_list.each do |friend|
-      potential_match_user = User.find_by_myself_friend_id friend
-      users << potential_match_user if potential_match_user and potential_match_user.active_list.include? user.myself_friend
+    user.active_list.each do |potential|
+      potential_match_user = User.find_by_myself_potential_id potential
+      users << potential_match_user if potential_match_user and potential_match_user.active_list.include? user.myself_potential
     end
     users
   end
 
-  def self.check_list friends
-    friends.uniq!
-    raise ListTooBigError if friends.size > max_list_size
-    friends
+  def self.check_list potentials
+    potentials.uniq!
+    raise ListTooBigError if potentials.size > max_list_size
+    potentials
   end
 
   private

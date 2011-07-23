@@ -7,9 +7,9 @@ bob:
   gender_id: 1
   interested_in: 2
   access_token: "bob"
-  friends: sally, fred
+  potentials: sally, fred
   interested_in_local: 2
-  myself_friend: bob
+  myself_potential: bob
 
 sally:
   fbid: 2
@@ -18,6 +18,6 @@ sally:
   gender_id: 2
   interested_in: 1
   access_token: "sally"
-  friends: bob
+  potentials: bob
   interested_in_local: 1
-  myself_friend: sally
+  myself_potential: sally

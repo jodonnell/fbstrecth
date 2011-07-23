@@ -26,7 +26,7 @@ end
 
 When /^I visit the show matches page and choose "([^"]*)"$/ do |name| "#"
   visit show_matches_path
-  find("#friend_#{send(string_to_identifier(name)).id}").click
+  find("#potential_#{send(string_to_identifier(name)).id}").click
   click_on 'Create List'
 end
 

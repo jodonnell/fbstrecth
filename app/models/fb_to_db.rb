@@ -10,7 +10,7 @@ class FbToDb
   def fb_to_db
     user = store_my_info
     store_family user
-    store_friends user
+    store_potentials user
   end
 
   def store_my_info
@@ -26,32 +26,32 @@ class FbToDb
 
   def store_family user
     family = @fb_api.get_family_info @access_token, user
-    family_friends = family.collect { |f| Family.create :fbid => f.uid }
-    user.families = family_friends
+    family_potentials = family.collect { |f| Family.create :fbid => f.uid }
+    user.families = family_potentials
     user.save!
   end
 
-  def store_friends user
-    friends_hash = @fb_api.get_my_friends_info @access_token
-    friends_hash = remove_family friends_hash, user.families
+  def store_potentials user
+    potentials_hash = @fb_api.get_my_friends_info @access_token
+    potentials_hash = remove_family potentials_hash, user.families
 
-    friends = friends_hash.collect do |f|
-      friend = Friend.find_by_fbid f.uid
-      if !friend
-        friend = Friend.create_from_api f
+    potentials = potentials_hash.collect do |f|
+      potential = Potential.find_by_fbid f.uid
+      if !potential
+        potential = Potential.create_from_api f
       else
-        friend.update_from_api f
+        potential.update_from_api f
       end
-      friend
+      potential
     end
 
-    user.friends = friends
-    user.friends(true)
+    user.potentials = potentials
+    user.potentials(true)
   end
 
   private
-  def remove_family friends_hash, family
+  def remove_family potentials_hash, family
     family_fbids = family.collect {|f| f.fbid }
-    friends_hash.select {|f| not family_fbids.include? f.uid }
+    potentials_hash.select {|f| not family_fbids.include? f.uid }
   end
 end

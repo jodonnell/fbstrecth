@@ -5,7 +5,7 @@ describe "fb_to_db" do
   before(:each) do
     @fb_return_user = fb_api_return_user
     @fb_return_family = fb_api_return_family
-    @fb_return_friends = fb_api_return_friends
+    @fb_return_potentials = fb_api_return_potentials
     
     fb_double = stub_fb_api
     @fb_to_db = create_fb_to_db fb_double
@@ -15,7 +15,7 @@ describe "fb_to_db" do
   describe "my information is stored correctly" do
     it "stores my info to db on first use" do 
       @user.fbid.should == 3800139
-      @user.myself_friend.should_not be_nil
+      @user.myself_potential.should_not be_nil
     end
 
     it "edits the user on subsequent logins when their data changes" do
@@ -43,35 +43,35 @@ describe "fb_to_db" do
     end
   end
     
-  describe "friend information is stored correctly" do
-    it "creates new friends" do
-      @fb_to_db.store_friends @user
-      @user.friends.length.should == 10
+  describe "potential information is stored correctly" do
+    it "creates new potentials" do
+      @fb_to_db.store_potentials @user
+      @user.potentials.length.should == 10
     end
 
-    it "does not add family to your friends" do 
+    it "does not add family to your potentials" do 
       @fb_to_db.store_family @user
-      @fb_to_db.store_friends @user
+      @fb_to_db.store_potentials @user
 
-      @user.friends.should_not include(Friend.find_by_fbid 1700652)
+      @user.potentials.should_not include(Potential.find_by_fbid 1700652)
     end
 
-    it "removes old friends" do
-      @fb_to_db.store_friends @user
-      @fb_return_friends.pop
+    it "removes old potentials" do
+      @fb_to_db.store_potentials @user
+      @fb_return_potentials.pop
 
-      @fb_to_db.store_friends @user
-      @user.friends.length.should == 9
+      @fb_to_db.store_potentials @user
+      @user.potentials.length.should == 9
     end
 
-    it "edits friends data on subsequent logins" do
-      @fb_to_db.store_friends @user
-      @fb_return_friends[0].name = 'Poop McBucket'
+    it "edits potentials data on subsequent logins" do
+      @fb_to_db.store_potentials @user
+      @fb_return_potentials[0].name = 'Poop McBucket'
 
-      @fb_to_db.store_friends @user
-      @user.friends[0].name.should == 'Poop McBucket'
+      @fb_to_db.store_potentials @user
+      @user.potentials[0].name.should == 'Poop McBucket'
 
-      @user.friends.count.should == 10
+      @user.potentials.count.should == 10
     end
   end
     
@@ -80,7 +80,7 @@ describe "fb_to_db" do
     fb_double = stub('FacebookAPI')
     fb_double.stub(:get_my_info).and_return(@fb_return_user)
     fb_double.stub(:get_family_info).and_return(@fb_return_family)
-    fb_double.stub(:get_my_friends_info).and_return(@fb_return_friends)
+    fb_double.stub(:get_my_friends_info).and_return(@fb_return_potentials)
     fb_double
   end
 
@@ -102,7 +102,7 @@ describe "fb_to_db" do
     [Hashie::Mash.new(uid: "1700652")]
   end
 
-  def fb_api_return_friends
+  def fb_api_return_potentials
     [Hashie::Mash.new(uid:108154,name:"Juan Gutierrez",profile_url:"http:\/\/www.facebook.com\/profile.php?id=108154",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/27411_108154_6390_s.jpg", gender: Gender.male, location:"New York, NY"),
      Hashie::Mash.new(uid:405604,name:"Audrey Rasizer",profile_url:"http:\/\/www.facebook.com\/AudreyR",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/23069_405604_5776_s.jpg", gender: Gender.female, location:"New York, NY"),
      Hashie::Mash.new(uid:906043,name:"Sarah Templeton",profile_url:"http:\/\/www.facebook.com\/profile.php?id=906043",pic:"http:\/\/profile.ak.fbcdn.net\/hprofile-ak-snc4\/202847_906043_6781830_s.jpg", gender: Gender.female, location:"New York, NY"),

@@ -29,12 +29,12 @@ class HomeController < ApplicationController
     user = User.find_by_access_token session[:access_token]
     return redirect_to :action => :show_matches if params[:ids].blank?
 
-    friends = params[:ids].collect do |friend_id|
-      id = friend_id.sub /friend_/, ''
-      Friend.find id
+    potentials = params[:ids].collect do |potential_id|
+      id = potential_id.sub /potential_/, ''
+      Potential.find id
     end
     
-    user.create_list friends
+    user.create_list potentials
     user.make_matches
     
     redirect_to :action => :show_matches

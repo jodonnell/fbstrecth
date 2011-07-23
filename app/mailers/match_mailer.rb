@@ -1,7 +1,7 @@
 class MatchMailer < ActionMailer::Base
   default :from => "match@stretchlist.com"
 
-  def match(user, friend)
+  def match(user, potential)
     @name = user.username
     mail(
          :to => user.email,

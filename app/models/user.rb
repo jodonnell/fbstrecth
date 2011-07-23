@@ -1,18 +1,18 @@
 class User < ActiveRecord::Base
   belongs_to :gender
   belongs_to :interested_in, :class_name => "Gender"
-  has_and_belongs_to_many :friends
+  has_and_belongs_to_many :potentials
   belongs_to :interested_in_local, :class_name => "Gender"
-  belongs_to :myself_friend, :class_name => "Friend"
+  belongs_to :myself_potential, :class_name => "Potential"
   has_many :families
   has_many :matches
 
   validates_presence_of :gender_id
   
   def self.create_from_api fb_info, token
-    friend = Friend.find_by_fbid(fb_info.id)
-    friend = Friend.create(:fbid => fb_info.id, :name => fb_info.name, :gender => Gender.find_by_gender_or_get_none(fb_info.gender)) if !friend
-    create(:fbid => fb_info.id, :email => fb_info.email, :username => fb_info.username, :gender => Gender.find_by_gender_or_get_none(fb_info.gender), :access_token => token, :myself_friend => friend)
+    potential = Potential.find_by_fbid(fb_info.id)
+    potential = Potential.create(:fbid => fb_info.id, :name => fb_info.name, :gender => Gender.find_by_gender_or_get_none(fb_info.gender)) if !potential
+    create(:fbid => fb_info.id, :email => fb_info.email, :username => fb_info.username, :gender => Gender.find_by_gender_or_get_none(fb_info.gender), :access_token => token, :myself_potential => potential)
   end
 
   def update_from_api fb_info, token
@@ -33,13 +33,13 @@ class User < ActiveRecord::Base
 
   def get_potential_matches
     match_gender = interested_in_local || interested_in || opposite_sex
-    return friends if match_gender == Gender.bisexual
-    friends.find_all_by_gender_id(match_gender.id)
+    return potentials if match_gender == Gender.bisexual
+    potentials.find_all_by_gender_id(match_gender.id)
   end
 
   def active_list
     active_matches = matches.where :active => true
-    active_matches.collect {|match| match.friend}
+    active_matches.collect {|match| match.potential}
   end
 
   def make_matches
@@ -52,8 +52,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def create_list friends
-    Match.create_list self, friends, Time.now
+  def create_list potentials
+    Match.create_list self, potentials, Time.now
   end
   
   private

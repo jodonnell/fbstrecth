@@ -1,13 +1,13 @@
-class Friend < ActiveRecord::Base
+class Potential < ActiveRecord::Base
   has_many :users
   belongs_to :gender
   has_many :matches
-  has_one :myself_friend, :class_name => "User"
+  has_one :myself_potential, :class_name => "User"
 
   validates_presence_of :gender_id
   
   def self.create_from_api fb_info
-    Friend.create :name => fb_info.name, :fbid => fb_info.uid, :gender => fb_info.gender, :profile_url => fb_info.profile_url, :pic => fb_info.pic, :square_pic => fb_info.pic_square,
+    Potential.create :name => fb_info.name, :fbid => fb_info.uid, :gender => fb_info.gender, :profile_url => fb_info.profile_url, :pic => fb_info.pic, :square_pic => fb_info.pic_square,
     :location => fb_info.location, :birthday => fb_info.birthday, :relationship_status => fb_info.relationship_status
   end
 

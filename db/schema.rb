@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110707043456) do
+ActiveRecord::Schema.define(:version => 20110723004941) do
 
   create_table "families", :force => true do |t|
     t.integer  "fbid",       :limit => 8
@@ -19,7 +19,23 @@ ActiveRecord::Schema.define(:version => 20110707043456) do
     t.datetime "updated_at"
   end
 
-  create_table "friends", :force => true do |t|
+  create_table "genders", :force => true do |t|
+    t.string   "gender"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "matches", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "potential_id"
+    t.boolean  "active"
+    t.boolean  "emailed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "create_time"
+  end
+
+  create_table "potentials", :force => true do |t|
     t.integer  "fbid",                :limit => 8
     t.string   "name"
     t.string   "pic"
@@ -33,25 +49,9 @@ ActiveRecord::Schema.define(:version => 20110707043456) do
     t.string   "relationship_status"
   end
 
-  create_table "friends_users", :id => false, :force => true do |t|
-    t.integer "friend_id"
+  create_table "potentials_users", :id => false, :force => true do |t|
+    t.integer "potential_id"
     t.integer "user_id"
-  end
-
-  create_table "genders", :force => true do |t|
-    t.string   "gender"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "matches", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.boolean  "active"
-    t.boolean  "emailed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "create_time"
   end
 
   create_table "users", :force => true do |t|
@@ -61,11 +61,11 @@ ActiveRecord::Schema.define(:version => 20110707043456) do
     t.integer  "gender_id"
     t.integer  "interested_in_id"
     t.string   "access_token"
-    t.integer  "friends_id"
+    t.integer  "potentials_id"
     t.integer  "interested_in_local_id"
-    t.integer  "myself_friend_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "myself_potential_id"
   end
 
 end
