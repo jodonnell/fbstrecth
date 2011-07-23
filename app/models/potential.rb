@@ -12,7 +12,7 @@ class Potential < ActiveRecord::Base
   end
 
   def update_from_api fb_info
-    if fb_info.name != name or fb_info.profile_url != profile_url or fb_info.pic != pic or fb_info.gender != gender or fb_info.pic_square != square_pic or fb_info.location != location or fb_info.birthday != birthday or fb_info.relationship_status != relationship_status
+    if any_changes? fb_info
       self.name = fb_info.name
       self.profile_url = fb_info.profile_url
       self.pic = pic
@@ -31,4 +31,10 @@ class Potential < ActiveRecord::Base
     now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
   end
   
+  private
+  def any_changes? fb_info
+    fb_info.name != name or fb_info.profile_url != profile_url or fb_info.pic != pic or fb_info.gender != gender or fb_info.pic_square != square_pic or
+    fb_info.location != location or fb_info.birthday != birthday or fb_info.relationship_status != relationship_status
+  end
+
 end

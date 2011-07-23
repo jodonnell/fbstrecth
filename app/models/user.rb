@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def make_matches
-    matches = Crush.crushes self
+    matches = Crush.matches self
     matches.each do |match|
       message = MatchMailer.match self, match
       message.deliver

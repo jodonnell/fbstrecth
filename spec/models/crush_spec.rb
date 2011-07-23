@@ -19,7 +19,7 @@ describe Crush do
   it "can find crushes" do
     Crush.create_list users(:bob), [potentials(:sally)], Time.now
     Crush.create_list users(:sally), [potentials(:bob)], Time.now
-    Crush.crushes(users(:bob)).should include(users(:sally))
+    Crush.matches(users(:bob)).should include(users(:sally))
   end
 
   it "cannot have duplicates" do

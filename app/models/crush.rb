@@ -3,15 +3,12 @@ class Crush < ActiveRecord::Base
   belongs_to :potential
   
   def self.create_list user, potentials, create_time
-    potentials = check_list potentials
-    user.crushes.where(:active => true).each {|crush| crush.active = false; crush.save!}
-
-    potentials.each do |potential|
-      Crush.create :user => user, :potential => potential, :create_time => create_time, :active => true, :emailed => false
-    end
+    check_list potentials
+    deactivate_last_list user
+    potentials_to_crushes user, potentials, create_time
   end
 
-  def self.crushes user
+  def self.matches user
     users = []
     user.active_list.each do |potential|
       potential_crush_user = User.find_by_myself_potential_id potential
@@ -20,13 +17,22 @@ class Crush < ActiveRecord::Base
     users
   end
 
+  private
+
   def self.check_list potentials
     potentials.uniq!
     raise ListTooBigError if potentials.size > max_list_size
-    potentials
   end
 
-  private
+  def self.deactivate_last_list user
+    user.crushes.where(:active => true).each {|crush| crush.active = false; crush.save!}
+  end
+
+  def self.potentials_to_crushes user, potentials, create_time
+    potentials.each do |potential|
+      Crush.create :user => user, :potential => potential, :create_time => create_time, :active => true, :emailed => false
+    end
+  end
 
   def self.max_list_size
     @max_list_size ||= 5

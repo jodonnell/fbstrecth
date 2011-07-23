@@ -49,6 +49,7 @@ class HomeController < ApplicationController
     redirect_to :action => :show_matches
   end
 
+  private
   def set_interested_in user
     user.interested_in_local = Gender.find params[:interested_in_id]
     user.save!
