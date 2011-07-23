@@ -12,6 +12,8 @@ Stretchlist::Application.routes.draw do
   match 'show_matches' => 'home#show_matches', :as => :show_matches
   match 'submit_list' => 'home#submit_list'
 
+  match 'local' => 'home#local', :as => :local_loophole
+
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)

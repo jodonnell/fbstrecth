@@ -16,11 +16,20 @@ class HomeController < ApplicationController
     redirect_to :action => :show_matches
   end
 
+  def local
+    raise if Rails.env != 'development'
+
+    user = User.find_by_username "jacobodonnell"
+    session[:access_token] = user.access_token
+
+    redirect_to :action => :show_matches
+  end
+
   def show_matches
     user = User.find_by_access_token session[:access_token]
     set_interested_in(user) unless params[:interested_in_id].nil?
 
-    @potential_matches = user.get_potential_matches
+    @potential_matches = user.get_potential_crushes
     @current_orientation = user.interested_in_local_id
     @current_list = user.active_list
   end
